@@ -54,6 +54,7 @@
             display: flex;
             gap: 2rem;
             list-style: none;
+            flex-wrap: wrap;
         }
 
         .nav-links a {
@@ -135,6 +136,27 @@
             justify-content: center;
         }
 
+        /* 头像样式 */
+        .avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+            border: 3px solid #fff;
+            transition: transform 0.3s;
+        }
+
+        body.dark .avatar {
+            border-color: #0f172a;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+        }
+
+        .avatar:hover {
+            transform: scale(1.02);
+        }
+
         #home h1 {
             font-size: 4rem;
             font-weight: 700;
@@ -167,29 +189,60 @@
             50% { border-color: transparent; }
         }
 
-        .social-icons {
-            margin-top: 2rem;
+        /* ---------- 个人账号（社交链接列表） ---------- */
+        .social-list {
             display: flex;
-            gap: 1.5rem;
-            font-size: 1.8rem;
+            flex-direction: column;
+            gap: 1.2rem;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 1rem;
         }
 
-        .social-icons a {
-            color: #475569;
-            transition: color 0.2s, transform 0.2s;
+        .social-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #e9edf2;
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+            color: inherit;
+            font-size: 1.1rem;
+            font-weight: 500;
         }
 
-        .social-icons a:hover {
-            color: #3b82f6;
+        body.dark .social-item {
+            background: #1e293b;
+            border-color: #334155;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .social-item:hover {
             transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
         }
 
-        body.dark .social-icons a {
-            color: #94a3b8;
+        body.dark .social-item:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
-        body.dark .social-icons a:hover {
+        .social-item i {
+            font-size: 1.8rem;
+            width: 2rem;
+            text-align: center;
+            color: #3b82f6;
+        }
+
+        body.dark .social-item i {
             color: #60a5fa;
+        }
+
+        .social-item span {
+            flex: 1;
         }
 
         /* ---------- 作品卡片 ---------- */
@@ -327,6 +380,14 @@
             section h2 {
                 font-size: 2rem;
             }
+            .avatar {
+                width: 120px;
+                height: 120px;
+            }
+            .social-item {
+                font-size: 1rem;
+                padding: 0.6rem 1rem;
+            }
         }
     </style>
 </head>
@@ -339,6 +400,7 @@
             <li><a href="#about">关于</a></li>
             <li><a href="#work">作品</a></li>
             <li><a href="#skills">技能</a></li>
+            <li><a href="#social">个人账号</a></li>   <!-- 新增 -->
             <li><a href="#contact">联系</a></li>
             <li><a href="https://t.co/esbP7PCZL9">tg群</a></li>
         </ul>
@@ -349,15 +411,11 @@
 
     <!-- ====== 首页 ====== -->
     <section id="home">
+        <!-- 头像图片：请将你的图片上传到仓库根目录，并修改 src 路径 -->
+        <img class="avatar" src="/avatar.jpg" alt="我的头像" />
         <h1>你好，我是 <span class="highlight">hh</span></h1>
         <div class="typing" id="typingText">✨ 创造者 · 学习者 · 折腾者</div>
-        <div class="social-icons">
-            <a href="#" aria-label="微博"><i class="fab fa-weibo"></i></a>
-            <a href="https://github.com/hhworld666" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://space.bilibili.com/1439537443?spm_id_from=333.1007.0.0" aria-label="B站"><i class="fab fa-bilibili"></i></a>
-            <a href="https://x.com/hhmylord66" aria-label="X"><i class="fab fa-x-twitter"></i></a>
-            <a href="#" aria-label="邮箱"><i class="fas fa-envelope"></i></a>
-        </div>
+        <!-- 社交图标已全部移除，现在放到下面的 #social 区块 -->
     </section>
 
     <!-- ====== 关于 ====== -->
@@ -409,6 +467,40 @@
         </div>
     </section>
 
+    <!-- ====== 个人账号（社交链接集中区） ====== -->
+    <section id="social">
+        <h2>🔗 个人账号</h2>
+        <p>欢迎关注我的其他平台，一起交流学习～</p>
+        <div class="social-list">
+            <a href="https://github.com/hhworld666" class="social-item" target="_blank">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+                <i class="fas fa-arrow-right" style="font-size:1rem; color:#94a3b8;"></i>
+            </a>
+            <a href="https://space.bilibili.com/1439537443" class="social-item" target="_blank">
+                <i class="fab fa-bilibili"></i>
+                <span>B站</span>
+                <i class="fas fa-arrow-right" style="font-size:1rem; color:#94a3b8;"></i>
+            </a>
+            <a href="https://x.com/hhmylord66" class="social-item" target="_blank">
+                <i class="fab fa-x-twitter"></i>
+                <span>Twitter (X)</span>
+                <i class="fas fa-arrow-right" style="font-size:1rem; color:#94a3b8;"></i>
+            </a>
+            <a href="#" class="social-item" target="_blank">
+                <i class="fab fa-weibo"></i>
+                <span>微博</span>
+                <i class="fas fa-arrow-right" style="font-size:1rem; color:#94a3b8;"></i>
+            </a>
+            <!-- 如果需要邮箱，也可以加一行 -->
+            <a href="mailto:johnanakin139@gmail.com" class="social-item">
+                <i class="fas fa-envelope"></i>
+                <span>邮箱</span>
+                <i class="fas fa-arrow-right" style="font-size:1rem; color:#94a3b8;"></i>
+            </a>
+        </div>
+    </section>
+
     <!-- ====== 联系 ====== -->
     <section id="contact">
         <h2>📬 联系我</h2>
@@ -430,7 +522,6 @@
         const toggle = document.getElementById('themeToggle');
         const icon = toggle.querySelector('i');
 
-        // 检测系统偏好
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.body.classList.add('dark');
             icon.className = 'fas fa-sun';
