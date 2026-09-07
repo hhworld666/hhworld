@@ -1,1 +1,431 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>[hh] · 个人主页</title>
+    <!-- 字体图标库 (Font Awesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ---------- 全局重置 ---------- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            transition: background 0.3s, color 0.3s;
+            scroll-behavior: smooth;
+        }
+
+        /* ---------- 深色模式 ---------- */
+        body.dark {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        /* ---------- 导航栏 ---------- */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 999;
+            transition: background 0.3s;
+        }
+
+        body.dark nav {
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.2s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 0%;
+            height: 2px;
+            background: #3b82f6;
+            transition: width 0.25s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: inherit;
+            padding: 0.2rem 0.5rem;
+            border-radius: 999px;
+            transition: background 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        body.dark .theme-toggle:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        /* ---------- 通用区块 ---------- */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 2.4rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.02em;
+        }
+
+        section p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            color: #475569;
+            max-width: 600px;
+        }
+
+        body.dark section p {
+            color: #94a3b8;
+        }
+
+        /* ---------- 首页 (Hero) ---------- */
+        #home {
+            min-height: 100vh;
+            justify-content: center;
+        }
+
+        #home h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.3rem;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .typing {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #475569;
+            border-right: 2px solid #3b82f6;
+            padding-right: 5px;
+            display: inline-block;
+            animation: blink 0.9s step-end infinite;
+        }
+
+        body.dark .typing {
+            color: #94a3b8;
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        .social-icons {
+            margin-top: 2rem;
+            display: flex;
+            gap: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .social-icons a {
+            color: #475569;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .social-icons a:hover {
+            color: #3b82f6;
+            transform: translateY(-3px);
+        }
+
+        body.dark .social-icons a {
+            color: #94a3b8;
+        }
+
+        body.dark .social-icons a:hover {
+            color: #60a5fa;
+        }
+
+        /* ---------- 作品卡片 ---------- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+
+        .project-card {
+            background: white;
+            padding: 1.8rem 1rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e9edf2;
+        }
+
+        body.dark .project-card {
+            background: #1e293b;
+            border-color: #334155;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+
+        .project-card i {
+            font-size: 2.4rem;
+            color: #3b82f6;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            color: #64748b;
+        }
+
+        body.dark .project-card p {
+            color: #94a3b8;
+        }
+
+        /* ---------- 联系 CTA ---------- */
+        .btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.7rem 2.2rem;
+            background: #3b82f6;
+            color: white;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .btn:hover {
+            background: #2563eb;
+            transform: scale(1.02);
+        }
+
+        /* ---------- 页脚 ---------- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        body.dark footer {
+            border-color: #1e293b;
+        }
+
+        /* ---------- 响应式 ---------- */
+        @media (max-width: 600px) {
+            nav {
+                padding: 0.6rem 1rem;
+                flex-wrap: wrap;
+                gap: 0.4rem;
+            }
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+            #home h1 {
+                font-size: 2.6rem;
+            }
+            .typing {
+                font-size: 1.1rem;
+            }
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ====== 导航 ====== -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#home">首页</a></li>
+            <li><a href="#about">关于</a></li>
+            <li><a href="#work">作品</a></li>
+            <li><a href="#contact">联系</a></li>
+            <li><a href="https://t.co/esbP7PCZL9">tg群</a></li>
+        </ul>
+        <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式">
+            <i class="fas fa-moon"></i>
+        </button>
+    </nav>
+
+    <!-- ====== 首页 ====== -->
+    <section id="home">
+        <h1>你好，我是 <span class="highlight">[hh]</span></h1>
+        <div class="typing" id="typingText">✨ 创造者 · 学习者 · 折腾者</div>
+        <div class="social-icons">
+            <a href="#" aria-label="微博"><i class="fab fa-weibo"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="#" aria-label="B站"><i class="fab fa-bilibili"></i></a>
+            <a href="#" aria-label="邮箱"><i class="fas fa-envelope"></i></a>
+        </div>
+    </section>
+
+    <!-- ====== 关于 ====== -->
+    <section id="about">
+        <h2>🧑‍💻 关于我</h2>
+        <p>
+            这里写一段关于你自己的介绍。比如你是什么职业、有什么爱好、目前正在学习什么。<br /><br />
+            例如：<br />
+            我是 [hh]，一名热爱设计与代码的独立开发者。喜欢捣鼓各种小工具，也热衷于分享技术心得。
+        </p>
+    </section>
+
+    <!-- ====== 作品 ====== -->
+    <section id="work">
+        <h2>📁 我的作品</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <i class="fas fa-globe"></i>
+                <h3>项目一</h3>
+                <p>简短描述这个项目是做什么的</p>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-code"></i>
+                <h3>项目二</h3>
+                <p>可以是你写的一个工具或网站</p>
+            </div>
+            <div class="project-card">
+                <i class="fas fa-paint-brush"></i>
+                <h3>项目三</h3>
+                <p>设计作品、摄影集或任何创作</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== 联系 ====== -->
+    <section id="contact">
+        <h2>📬 联系我</h2>
+        <p>如果你有想法想聊聊，或者只是打个招呼，都欢迎！</p>
+        <a href="mailto:your-email@example.com" class="btn">发送邮件</a>
+    </section>
+
+    <!-- ====== 页脚 ====== -->
+    <footer>
+        &copy; 2026 [hh] · 用 ❤️ 和 ☕ 搭建
+    </footer>
+
+    <!-- ====== JavaScript ====== -->
+    <script>
+        // ---------- 1. 深色模式切换 ----------
+        const toggle = document.getElementById('themeToggle');
+        const icon = toggle.querySelector('i');
+
+        // 检测系统偏好
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark');
+            icon.className = 'fas fa-sun';
+        }
+
+        toggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+            if (document.body.classList.contains('dark')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
+            }
+        });
+
+        // ---------- 2. 打字机效果 ----------
+        const phrases = [
+            '✨ 创造者 · 学习者 · 折腾者',
+            '🚀 把想法变成现实',
+            '🎯 终身成长，持续输出'
+        ];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingElement = document.getElementById('typingText');
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            if (!isDeleting) {
+                // 打字
+                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                if (charIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(typeEffect, 2000); // 停留2秒
+                    return;
+                }
+                setTimeout(typeEffect, 100);
+            } else {
+                // 删除
+                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    setTimeout(typeEffect, 300);
+                    return;
+                }
+                setTimeout(typeEffect, 50);
+            }
+        }
+
+        // 启动打字机
+        typeEffect();
+    </script>
+</body>
+</html>
