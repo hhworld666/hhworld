@@ -3,32 +3,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>hh个人站</title>
+    <title>首页 - hh个人站</title>
     <link rel="icon" type="image/png" href="/Lightsaber-Red-icon_34497.png">
-    <!-- 字体图标库 (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         /* ---------- 全局重置 ---------- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
             background: #f8fafc;
             color: #0f172a;
             transition: background 0.3s, color 0.3s;
-            scroll-behavior: smooth;
         }
-
-        /* ---------- 深色模式 ---------- */
         body.dark {
             background: #0f172a;
             color: #e2e8f0;
         }
-
         /* ---------- 导航栏 ---------- */
         nav {
             position: fixed;
@@ -36,7 +26,7 @@
             left: 0;
             right: 0;
             backdrop-filter: blur(12px);
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255,255,255,0.7);
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             padding: 0.8rem 2rem;
             display: flex;
@@ -45,18 +35,15 @@
             z-index: 999;
             transition: background 0.3s;
         }
-
         body.dark nav {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15,23,42,0.8);
         }
-
         .nav-links {
             display: flex;
             gap: 2rem;
             list-style: none;
             flex-wrap: wrap;
         }
-
         .nav-links a {
             text-decoration: none;
             color: inherit;
@@ -65,7 +52,6 @@
             transition: color 0.2s;
             position: relative;
         }
-
         .nav-links a::after {
             content: '';
             position: absolute;
@@ -76,11 +62,9 @@
             background: #3b82f6;
             transition: width 0.25s;
         }
-
         .nav-links a:hover::after {
             width: 100%;
         }
-
         .theme-toggle {
             background: none;
             border: none;
@@ -91,16 +75,14 @@
             border-radius: 999px;
             transition: background 0.2s;
         }
-
         .theme-toggle:hover {
             background: rgba(0,0,0,0.05);
         }
-
         body.dark .theme-toggle:hover {
             background: rgba(255,255,255,0.05);
         }
 
-        /* ---------- 通用区块 ---------- */
+        /* ---------- 首页 Hero ---------- */
         section {
             min-height: 100vh;
             display: flex;
@@ -112,31 +94,6 @@
             margin: 0 auto;
             text-align: center;
         }
-
-        section h2 {
-            font-size: 2.4rem;
-            margin-bottom: 1.2rem;
-            letter-spacing: -0.02em;
-        }
-
-        section p {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            color: #475569;
-            max-width: 600px;
-        }
-
-        body.dark section p {
-            color: #94a3b8;
-        }
-
-        /* ---------- 首页 (Hero) ---------- */
-        #home {
-            min-height: 100vh;
-            justify-content: center;
-        }
-
-        /* 头像样式 */
         .avatar {
             width: 160px;
             height: 160px;
@@ -147,30 +104,25 @@
             border: 3px solid #fff;
             transition: transform 0.3s;
         }
-
         body.dark .avatar {
             border-color: #0f172a;
             box-shadow: 0 8px 24px rgba(0,0,0,0.4);
         }
-
         .avatar:hover {
             transform: scale(1.02);
         }
-
-        #home h1 {
+        h1 {
             font-size: 4rem;
             font-weight: 700;
             letter-spacing: -0.03em;
             margin-bottom: 0.3rem;
         }
-
         .highlight {
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .typing {
             font-size: 1.5rem;
             font-weight: 300;
@@ -180,171 +132,11 @@
             display: inline-block;
             animation: blink 0.9s step-end infinite;
         }
-
         body.dark .typing {
             color: #94a3b8;
         }
-
         @keyframes blink {
             50% { border-color: transparent; }
-        }
-
-        /* ---------- 个人账号（社交链接列表） ---------- */
-        .social-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-            width: 100%;
-            max-width: 300px;
-            margin-top: 1rem;
-        }
-
-        .social-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.8rem 1.5rem;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #e9edf2;
-            transition: transform 0.2s, box-shadow 0.2s;
-            text-decoration: none;
-            color: inherit;
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        body.dark .social-item {
-            background: #1e293b;
-            border-color: #334155;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .social-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-        }
-
-        body.dark .social-item:hover {
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-
-        .social-item i {
-            font-size: 1.8rem;
-            width: 2rem;
-            text-align: center;
-            color: #3b82f6;
-        }
-
-        body.dark .social-item i {
-            color: #60a5fa;
-        }
-
-        .social-item span {
-            flex: 1;
-        }
-
-        /* ---------- 作品卡片 ---------- */
-        .project-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-            margin-top: 1.5rem;
-        }
-
-        .project-card {
-            background: white;
-            padding: 1.8rem 1rem;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid #e9edf2;
-        }
-
-        body.dark .project-card {
-            background: #1e293b;
-            border-color: #334155;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
-        }
-
-        .project-card i {
-            font-size: 2.4rem;
-            color: #3b82f6;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
-        }
-
-        .project-card p {
-            font-size: 0.95rem;
-            color: #64748b;
-        }
-
-        body.dark .project-card p {
-            color: #94a3b8;
-        }
-
-        /* ---------- 技能标签 ---------- */
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.8rem;
-            margin-top: 1.5rem;
-        }
-
-        .skill-tag {
-            background: #e2e8f0;
-            padding: 0.4rem 1.2rem;
-            border-radius: 999px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #0f172a;
-            transition: background 0.2s, transform 0.15s;
-        }
-
-        body.dark .skill-tag {
-            background: #1e293b;
-            color: #e2e8f0;
-        }
-
-        .skill-tag:hover {
-            transform: scale(1.05);
-            background: #3b82f6;
-            color: white;
-        }
-
-        body.dark .skill-tag:hover {
-            background: #3b82f6;
-            color: white;
-        }
-
-        /* ---------- 联系 CTA ---------- */
-        .btn {
-            display: inline-block;
-            margin-top: 1.5rem;
-            padding: 0.7rem 2.2rem;
-            background: #3b82f6;
-            color: white;
-            border-radius: 999px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.2s, transform 0.15s;
-        }
-
-        .btn:hover {
-            background: #2563eb;
-            transform: scale(1.02);
         }
 
         /* ---------- 页脚 ---------- */
@@ -355,53 +147,28 @@
             color: #94a3b8;
             border-top: 1px solid #e2e8f0;
         }
-
         body.dark footer {
             border-color: #1e293b;
         }
-
-        /* ---------- 响应式 ---------- */
         @media (max-width: 600px) {
-            nav {
-                padding: 0.6rem 1rem;
-                flex-wrap: wrap;
-                gap: 0.4rem;
-            }
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-            #home h1 {
-                font-size: 2.6rem;
-            }
-            .typing {
-                font-size: 1.1rem;
-            }
-            section h2 {
-                font-size: 2rem;
-            }
-            .avatar {
-                width: 120px;
-                height: 120px;
-            }
-            .social-item {
-                font-size: 1rem;
-                padding: 0.6rem 1rem;
-            }
+            nav { padding: 0.6rem 1rem; flex-wrap: wrap; gap: 0.4rem; }
+            .nav-links { gap: 1rem; font-size: 0.9rem; }
+            h1 { font-size: 2.6rem; }
+            .typing { font-size: 1.1rem; }
+            .avatar { width: 120px; height: 120px; }
         }
     </style>
 </head>
 <body>
-
     <!-- ====== 导航 ====== -->
     <nav>
         <ul class="nav-links">
-            <li><a href="#home">首页</a></li>
-            <li><a href="#about">关于</a></li>
-            <li><a href="#work">作品</a></li>
-            <li><a href="#skills">技能</a></li>
-            <li><a href="#social">个人账号</a></li>   <!-- 新增 -->
-            <li><a href="#contact">联系</a></li>
+            <li><a href="index.html">首页</a></li>
+            <li><a href="about.html">关于</a></li>
+            <li><a href="work.html">作品</a></li>
+            <li><a href="skills.html">技能</a></li>
+            <li><a href="social.html">个人账号</a></li>
+            <li><a href="contact.html">联系</a></li>
             <li><a href="https://t.co/esbP7PCZL9">tg群</a></li>
         </ul>
         <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式">
@@ -409,157 +176,46 @@
         </button>
     </nav>
 
-    <!-- ====== 首页 ====== -->
-    <section id="home">
-        <!-- 头像图片：请将你的图片上传到仓库根目录，并修改 src 路径 -->
+    <!-- ====== 首页内容 ====== -->
+    <section>
         <img class="avatar" src="/-wwEGKlL_200x200.jpg" alt="hh" />
         <h1>你好，我是 <span class="highlight">hh</span></h1>
         <div class="typing" id="typingText">✨ 创造者 · 学习者 · 折腾者</div>
-        <!-- 社交图标已全部移除，现在放到下面的 #social 区块 -->
-    </section>
-
-    <!-- ====== 关于 ====== -->
-    <section id="about">
-        <h2>🧑‍💻 关于我</h2>
-        <p>
-            大家好，我是 <strong>hh</strong>，一名热爱设计与代码的独立开发者。<br /><br />
-            🔹 喜欢捣鼓各种小工具，也热衷于分享技术心得<br />
-            🔹 目前正在探索 Web 开发、开源软件和效率工具<br />
-            🔹 相信技术能让生活更美好，也相信持续学习的力量
-        </p>
-    </section>
-
-    <!-- ====== 作品 ====== -->
-    <section id="work">
-        <h2>📁 我的作品</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <i class="fas fa-globe"></i>
-                <h3>个人主页</h3>
-                <p>本站就是我的第一个作品，用 HTML + CSS 搭建</p>
-            </div>
-            <div class="project-card">
-                <i class="fas fa-code"></i>
-                <h3>开源工具</h3>
-                <p>正在开发中的小工具，敬请期待</p>
-            </div>
-            <div class="project-card">
-                <i class="fas fa-paint-brush"></i>
-                <h3>设计作品</h3>
-                <p>UI 设计、摄影或创意项目</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ====== 技能 ====== -->
-    <section id="skills">
-        <h2>⚡ 技能标签</h2>
-        <p>我日常使用和正在学习的一些技术：</p>
-        <div class="skills">
-            <span class="skill-tag">HTML5</span>
-            <span class="skill-tag">CSS3</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">Git</span>
-            <span class="skill-tag">Linux</span>
-            <span class="skill-tag">Docker</span>
-            <span class="skill-tag">Cloudflare</span>
-        </div>
-    </section>
-
-    <!-- ====== 个人账号（社交链接集中区） ====== -->
-    <section id="social">
-        <h2>🔗 个人账号</h2>
-        <p>欢迎关注我的其他平台，一起交流学习～</p>
-        <div class="social-list">
-            <a href="https://github.com/hhworld666" class="social-item" target="_blank">
-                <i class="fab fa-github"></i>
-                <span>GitHub</span>
-                <i class="fas fa-arrow-right" style="font-size:1rem; color:#94a3b8;"></i>
-            </a>
-            <a href="https://space.bilibili.com/1439537443" class="social-item" target="_blank">
-                <i class="fab fa-bilibili"></i>
-                <span>B站</span>
-                <i class="fas fa-arrow-right" style="font-size:1rem; color:#94a3b8;"></i>
-            </a>
-            <a href="https://x.com/hhmylord66" class="social-item" target="_blank">
-                <i class="fab fa-x-twitter"></i>
-                <span>Twitter (X)</span>
-                <i class="fas fa-arrow-right" style="font-size:1rem; color:#94a3b8;"></i>
-            </a>
-            <a href="#" class="social-item" target="_blank">
-                <i class="fab fa-weibo"></i>
-                <span>微博</span>
-                <i class="fas fa-arrow-right" style="font-size:1rem; color:#94a3b8;"></i>
-            </a>
-            <!-- 如果需要邮箱，也可以加一行 -->
-            <a href="mailto:johnanakin139@gmail.com" class="social-item">
-                <i class="fas fa-envelope"></i>
-                <span>邮箱</span>
-                <i class="fas fa-arrow-right" style="font-size:1rem; color:#94a3b8;"></i>
-            </a>
-        </div>
-    </section>
-
-    <!-- ====== 联系 ====== -->
-    <section id="contact">
-        <h2>📬 联系我</h2>
-        <p>如果你有想法想聊聊，或者只是打个招呼，都欢迎！</p>
-        <p style="font-size: 0.95rem; margin-top: 0.5rem; color: #64748b;">
-            ✉️ johnanakin139@gmail.com
-        </p>
-        <a href="mailto:johnanakin139@gmail.com" class="btn">发送邮件</a>
     </section>
 
     <!-- ====== 页脚 ====== -->
-    <footer>
-        &copy; 2026 hh · 用 ❤️ 和 ☕ 搭建
-    </footer>
+    <footer>&copy; 2026 hh · 用 ❤️ 和 ☕ 搭建</footer>
 
-    <!-- ====== JavaScript ====== -->
     <script>
-        // ---------- 1. 深色模式切换 ----------
+        // 深色模式
         const toggle = document.getElementById('themeToggle');
         const icon = toggle.querySelector('i');
-
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             document.body.classList.add('dark');
             icon.className = 'fas fa-sun';
         }
-
         toggle.addEventListener('click', () => {
             document.body.classList.toggle('dark');
-            if (document.body.classList.contains('dark')) {
-                icon.className = 'fas fa-sun';
-            } else {
-                icon.className = 'fas fa-moon';
-            }
+            icon.className = document.body.classList.contains('dark') ? 'fas fa-sun' : 'fas fa-moon';
         });
 
-        // ---------- 2. 打字机效果 ----------
-        const phrases = [
-            '✨ 创造者 · 学习者 · 折腾者',
-            '🚀 把想法变成现实',
-            '🎯 终身成长，持续输出'
-        ];
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingElement = document.getElementById('typingText');
-
+        // 打字机效果
+        const phrases = ['✨ 创造者 · 学习者 · 折腾者', '🚀 把想法变成现实', '🎯 终身成长，持续输出'];
+        let phraseIndex = 0, charIndex = 0, isDeleting = false;
+        const el = document.getElementById('typingText');
         function typeEffect() {
-            const currentPhrase = phrases[phraseIndex];
+            const current = phrases[phraseIndex];
             if (!isDeleting) {
-                typingElement.textContent = currentPhrase.substring(0, charIndex + 1);
+                el.textContent = current.substring(0, charIndex + 1);
                 charIndex++;
-                if (charIndex === currentPhrase.length) {
+                if (charIndex === current.length) {
                     isDeleting = true;
                     setTimeout(typeEffect, 2000);
                     return;
                 }
                 setTimeout(typeEffect, 100);
             } else {
-                typingElement.textContent = currentPhrase.substring(0, charIndex - 1);
+                el.textContent = current.substring(0, charIndex - 1);
                 charIndex--;
                 if (charIndex === 0) {
                     isDeleting = false;
@@ -570,7 +226,6 @@
                 setTimeout(typeEffect, 50);
             }
         }
-
         typeEffect();
     </script>
 </body>
